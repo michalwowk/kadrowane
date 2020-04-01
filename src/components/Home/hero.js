@@ -1,63 +1,71 @@
 import React from "react"
 import styled from "styled-components"
+import BackgroundImage from "gatsby-background-image"
+
+import { Logo } from "src/components/Logo.js"
 
 import heroBg from "src/images/backgrounds/hero-background.jpg"
-import Logo from "src/images/icons/kadrowane-logo.svg"
+import AuthorName from "src/images/icons/Author.svg"
+import { useStaticQuery, graphql } from "gatsby"
 
-const Title = styled.h1`
-  color: ${props => props.theme.white};
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-`
+export const Hero = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      strapiHomepage {
+        heroLogo {
+          publicURL
+        }
+        heroBackground {
+          childImageSharp {
+            fluid(maxWidth: 2560) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+        websiteAuthorCaption
+      }
+    }
+  `)
+
+  const { heroLogo, heroBackground, websiteAuthorCaption } = data.strapiHomepage
+
+  const backgroundImgSrc = heroBackground.childImageSharp.fluid
+  const logoImgSrc = heroLogo.publicURL
+
+  return (
+    <BackgroundImage Tag="section" fluid={backgroundImgSrc}>
+      <Wrapper>
+        <Logo maxWidth="420" imgSrc={logoImgSrc} />
+        <h3>{websiteAuthorCaption}</h3>
+      </Wrapper>
+    </BackgroundImage>
+  )
+}
 
 const Wrapper = styled.section`
-  background-image: linear-gradient(
-      to bottom,
-      ${props => props.theme.black},
-      transparent
-    ),
-    url(${heroBg});
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   overflow-x: hidden;
+  position: relative;
 
   svg {
     margin-left: 20px;
     margin-right: 20px;
   }
-`
 
-const StyledSVG = styled(Logo)`
-  width: 100px;
-
-  .body {
-    stroke: ${props => props.theme.black};
-    fill: transparent;
-    stroke-width: 15px;
-  }
-
-  .body {
-    stroke-dasharray: 10000;
-    stroke-dashoffset: 10000;
-    animation: dash 15s linear forwards;
-  }
-
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 0;
-    }
+  ::after {
+    content: "";
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      transparent
+    );
   }
 `
-
-export const Hero = () => {
-  return (
-    <Wrapper>
-      <Title>
-        lorem <StyledSVG /> ipsum
-      </Title>
-    </Wrapper>
-  )
-}

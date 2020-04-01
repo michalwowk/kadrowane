@@ -14,11 +14,19 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: `http://localhost:1337`,
+        contentTypes: [`homepage`, `global`],
+        queryLimit: 1000,
+      },
+    },
     `gatsby-plugin-typescript`,
     `gatsby-plugin-styled-components`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-background-image`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -41,6 +49,6 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 }
