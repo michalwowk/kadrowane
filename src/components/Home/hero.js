@@ -1,63 +1,83 @@
 import React from "react"
 import styled from "styled-components"
+import BackgroundImage from "gatsby-background-image"
 
-import heroBg from "src/images/backgrounds/hero-background.jpg"
-import Logo from "src/images/icons/kadrowane-logo.svg"
+import { useStaticQuery, graphql } from "gatsby"
 
-const Title = styled.h1`
-  color: ${props => props.theme.white};
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-`
+export const Hero = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      strapiHomepage {
+        heroBackground {
+          childImageSharp {
+            fluid(maxWidth: 2560) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+        websiteAuthorCaption
+      }
+    }
+  `)
+
+  const { heroBackground, websiteAuthorCaption } = data.strapiHomepage
+
+  const backgroundImgSrc = heroBackground.childImageSharp.fluid
+
+  return (
+    <BackgroundImage Tag="section" fluid={backgroundImgSrc}>
+      <Wrapper>
+        <Title>
+          Fotografia Hobbystyczna <span>{websiteAuthorCaption}</span>
+        </Title>
+      </Wrapper>
+    </BackgroundImage>
+  )
+}
 
 const Wrapper = styled.section`
-  background-image: linear-gradient(
-      to bottom,
-      ${props => props.theme.black},
-      transparent
-    ),
-    url(${heroBg});
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow-x: hidden;
+  position: relative;
 
-  svg {
-    margin-left: 20px;
-    margin-right: 20px;
+  ::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.1) 76%
+    );
+  }
+
+  * {
+    z-index: 3;
   }
 `
 
-const StyledSVG = styled(Logo)`
-  width: 100px;
+const Title = styled.h1`
+  color: ${props => props.theme.white};
+  text-align: center;
+  font-family: ${props => props.theme.fontAccentTwo};
+  font-weight: 200;
+  text-transform: uppercase;
+  font-size: 3.5rem;
+  line-height: 1.7;
+  letter-spacing: 6px;
 
-  .body {
-    stroke: ${props => props.theme.black};
-    fill: transparent;
-    stroke-width: 15px;
-  }
-
-  .body {
-    stroke-dasharray: 10000;
-    stroke-dashoffset: 10000;
-    animation: dash 15s linear forwards;
-  }
-
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 0;
-    }
+  span {
+    letter-spacing: 4px;
+    margin-top: 15px;
+    text-transform: none;
+    display: block;
+    font-family: ${props => props.theme.fontAccent};
+    font-weight: 400;
+    font-size: 1em;
   }
 `
-
-export const Hero = () => {
-  return (
-    <Wrapper>
-      <Title>
-        lorem <StyledSVG /> ipsum
-      </Title>
-    </Wrapper>
-  )
-}

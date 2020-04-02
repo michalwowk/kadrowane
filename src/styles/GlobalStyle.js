@@ -3,12 +3,15 @@ import { createGlobalStyle } from "styled-components"
 export const GlobalStyles = createGlobalStyle`
 html {
   line-height: 1.15; 
-  -webkit-text-size-adjust: 100%; 
+  -webkit-text-size-adjust: 100%;
+  font-size: 62.5%;
 }
 
 body {
   margin: 0;
   background-color: ${props => props.theme.dark};
+  font-family: ${props => props.theme.fontDefault};
+  font-weight: 400;
 }
 
 main {
