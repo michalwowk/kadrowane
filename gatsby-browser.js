@@ -7,3 +7,5 @@
 // You can delete this file if you're not using it
 
 require("typeface-italianno")
+require("typeface-rokkitt")
+require("typeface-crimson-pro")
