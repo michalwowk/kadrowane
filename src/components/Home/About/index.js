@@ -6,5 +6,5 @@ const Wrapper = styled.section`
 `
 
 export const About = () => {
-  return <Wrapper></Wrapper>
+  return <Wrapper>test</Wrapper>
 }
