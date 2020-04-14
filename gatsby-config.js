@@ -15,11 +15,26 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-strapi`,
+      resolve: `gatsby-source-wordpress`,
       options: {
-        apiURL: `http://localhost:1337`,
-        contentTypes: [`homepage`, `global`],
-        queryLimit: 1000,
+        // your WordPress source
+        baseUrl: `localhost/kadrowane`,
+        protocol: `http`,
+        // is it hosted on wordpress.com, or self-hosted?
+        hostingWPCOM: false,
+        // does your site use the Advanced Custom Fields Plugin?
+        useACF: true,
+        // Whitelisted routes using glob patterns
+        perPage: 100,
+        includedRoutes: [
+          "**/categories",
+          "**/posts",
+          "**/pages",
+          "**/media",
+          "**/tags",
+          "**/taxonomies",
+          "**/users",
+        ],
       },
     },
     `gatsby-plugin-typescript`,

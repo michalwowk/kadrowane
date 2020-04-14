@@ -5,34 +5,7 @@ import BackgroundImage from "gatsby-background-image"
 import { useStaticQuery, graphql } from "gatsby"
 
 export const Hero = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      strapiHomepage {
-        heroBackground {
-          childImageSharp {
-            fluid(maxWidth: 2560) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-        websiteAuthorCaption
-      }
-    }
-  `)
-
-  const { heroBackground, websiteAuthorCaption } = data.strapiHomepage
-
-  const backgroundImgSrc = heroBackground.childImageSharp.fluid
-
-  return (
-    <BackgroundImage Tag="section" fluid={backgroundImgSrc}>
-      <Wrapper>
-        <Title>
-          Fotografia Hobbystyczna <span>{websiteAuthorCaption}</span>
-        </Title>
-      </Wrapper>
-    </BackgroundImage>
-  )
+  return <div>this is hero</div>
 }
 
 const Wrapper = styled.section`

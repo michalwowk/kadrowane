@@ -7,21 +7,12 @@ const StyledLogo = styled.img`
 `
 
 export const Logo = ({ maxWidth, imgSrc }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      strapiGlobal {
-        logo {
-          publicURL
-        }
-      }
-    }
-  `)
-
   return (
-    <StyledLogo
-      maxWidth={maxWidth}
-      src={imgSrc ? imgSrc : data.strapiGlobal.logo.publicURL}
-      alt="Kadrowane Fotografia Hobbystyczna Logo"
-    />
+    <div>this is logo</div>
+    // <StyledLogo
+    //   maxWidth={maxWidth}
+    //   src={imgSrc ? imgSrc : data.strapiGlobal.logo.publicURL}
+    //   alt="Kadrowane Fotografia Hobbystyczna Logo"
+    // />
   )
 }
