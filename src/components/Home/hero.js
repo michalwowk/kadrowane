@@ -50,18 +50,6 @@ const Wrapper = styled.div`
   overflow-x: hidden;
   position: relative;
 
-  ::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.1) 76%
-    );
-  }
-
   * {
     z-index: 3;
   }
