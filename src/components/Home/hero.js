@@ -1,14 +1,47 @@
 import React from "react"
 import styled from "styled-components"
-import BackgroundImage from "gatsby-background-image"
+import Img from "gatsby-image"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
-import { useStaticQuery, graphql } from "gatsby"
-
-export const Hero = () => {
-  return <div>this is hero</div>
+export const Hero = ({
+  logo,
+  backgroundImages,
+  leftSidetitle,
+  leftSidetext,
+  middleText,
+  rightSideTitle,
+  rightSidetext,
+}) => {
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+  }
+  return (
+    <section>
+      <Wrapper>
+        {logo && (
+          <div>
+            <Img fixed={logo.localFile.childImageSharp.fixed} />
+          </div>
+        )}
+      </Wrapper>
+      <StyledSlider {...settings}>
+        {backgroundImages.map((image, index) => (
+          <StyledBgWrapper>
+            <StyledBg fluid={image.image.localFile.childImageSharp.fluid} />
+          </StyledBgWrapper>
+        ))}
+      </StyledSlider>
+    </section>
+  )
 }
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,23 +67,21 @@ const Wrapper = styled.section`
   }
 `
 
-const Title = styled.h1`
-  color: ${props => props.theme.white};
-  text-align: center;
-  font-family: ${props => props.theme.fontAccentTwo};
-  font-weight: 200;
-  text-transform: uppercase;
-  font-size: 3.5rem;
-  line-height: 1.7;
-  letter-spacing: 6px;
+const StyledSlider = styled(Slider)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  display: flex;
+`
 
-  span {
-    letter-spacing: 4px;
-    margin-top: 15px;
-    text-transform: none;
-    display: block;
-    font-family: ${props => props.theme.fontAccent};
-    font-weight: 400;
-    font-size: 1em;
-  }
+const StyledBgWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`
+const StyledBg = styled(Img)`
+  width: 100%;
+  height: 100%;
 `
