@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <SEO title="Home" />
       <Hero {...hero} />
-      <About {...aboutMe} />
+      {/* <About {...aboutMe} /> */}
       <Cards {...featuresColumns} />
     </Layout>
   )
@@ -61,9 +61,12 @@ export const query = graphql`
               text
               title
               image {
+                source_url
                 localFile {
                   childImageSharp {
-                    fluid
+                    fluid(maxWidth: 640) {
+                      ...GatsbyImageSharpFluid
+                    }
                   }
                 }
               }

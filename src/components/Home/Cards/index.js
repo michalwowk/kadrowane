@@ -1,20 +1,33 @@
 import React from "react"
 import { SingleCard } from "./SingleCard"
 import styled from "styled-components"
+import BackgroundImage from "gatsby-background-image"
 
-import roadPhoto from "src/images/backgrounds/droga_las.jpg"
-import flowersPhoto from "src/images/backgrounds/rzepak.jpg"
-import myPlacePhoto from "src/images/backgrounds/kozi.jpg"
+export const Cards = ({ title, column }) => {
+  return (
+    <>
+      {title && <h2>{title}</h2>}
+      {column && (
+        <Wrapper>
+          {column.map(item => {
+            const { text, title, image } = item
+            console.log(item)
+            return (
+              <SingleCard
+                key={title}
+                title={title}
+                subtitle={text}
+                imageSrc={image.source_url}
+              />
+            )
+          })}
+        </Wrapper>
+      )}
+    </>
+  )
+}
 
-const StyledCards = styled.section`
+const Wrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 `
-
-export const Cards = () => {
-  return (
-    <StyledCards>
-      <SingleCard title="title 1" subtitle="subtitle1" imageSrc={roadPhoto} />
-    </StyledCards>
-  )
-}

@@ -41,7 +41,7 @@ export const Hero = ({
         </Wrapper>
         <StyledSlider {...settings}>
           {backgroundImages.map((image, index) => (
-            <StyledBgWrapper>
+            <StyledBgWrapper key={index}>
               <StyledImg fluid={image.image.localFile.childImageSharp.fluid} />
             </StyledBgWrapper>
           ))}
