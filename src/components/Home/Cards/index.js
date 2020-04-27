@@ -15,17 +15,6 @@ export const Cards = () => {
   return (
     <StyledCards>
       <SingleCard title="title 1" subtitle="subtitle1" imageSrc={roadPhoto} />
-      <SingleCard
-        title="title 2"
-        titleColor="red"
-        subtitle="subtitle2"
-        imageSrc={flowersPhoto}
-      />
-      <SingleCard
-        title="title 3"
-        subtitle="subtitle3"
-        imageSrc={myPlacePhoto}
-      />
     </StyledCards>
   )
 }

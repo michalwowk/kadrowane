@@ -2,7 +2,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Hero } from "../components/Home/hero"
+import { Hero } from "../components/Home/Hero"
 import { About } from "../components/Home/about"
 import { Cards } from "src/components/Home/Cards"
 import { graphql } from "gatsby"
@@ -54,6 +54,20 @@ export const query = graphql`
             middleText
             rightSideTitle
             rightSidetext
+          }
+          featuresColumns {
+            title
+            column {
+              text
+              title
+              image {
+                localFile {
+                  childImageSharp {
+                    fluid
+                  }
+                }
+              }
+            }
           }
           aboutMe {
             title
